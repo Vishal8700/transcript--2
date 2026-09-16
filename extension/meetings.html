@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transcriber — Meetings</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: "Inter", sans-serif;
+            padding: 2rem 3rem;
+            color: #e0e0e0;
+            background: #0a0a0a;
+            font-size: 0.9375rem;
+            accent-color: #ffffff;
+        }
+
+        dialog {
+            padding: 1.5rem 2rem;
+            color: #e0e0e0;
+            background: #141414;
+            font-size: 1rem;
+            border: 1px solid #2a2a2a;
+            border-radius: 0.75rem;
+        }
+
+        dialog::backdrop {
+            background-color: black;
+            opacity: 0.85;
+        }
+
+        #later-button {
+            background: transparent;
+            color: #e0e0e0;
+            border: 1px solid #3a3a3a;
+        }
+
+        h1 {
+            margin: 0.5rem 0 0.25rem 0;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+        }
+
+        .tagline {
+            color: #666;
+            font-size: 0.85rem;
+            margin: 0 0 2rem 0;
+        }
+
+        /* ── Table section ── */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        #recover-last-meeting {
+            background: transparent;
+            color: #888;
+            border: 1px solid #2a2a2a;
+            border-radius: 6px;
+            padding: 0.3rem 0.75rem;
+            font-size: 0.8rem;
+            display: flex;
+            gap: 0.35rem;
+            align-items: center;
+            cursor: pointer;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        #recover-last-meeting:hover {
+            border-color: #555;
+            color: #e0e0e0;
+        }
+
+        #meetings-table-container { overflow-x: auto; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #111111;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #1e1e1e;
+        }
+
+        th, td {
+            padding: 0.9rem 1.25rem;
+            text-align: left;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        th {
+            background: #161616;
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: #666;
+        }
+
+        td { color: #c0c0c0; font-size: 0.875rem; }
+
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: #161616; }
+
+        .meeting-title {
+            text-decoration: underline #444;
+            text-underline-offset: 5px;
+            padding: 0.15rem 0.25rem;
+            border-radius: 4px;
+            color: #e0e0e0;
+            outline: none;
+        }
+
+        .meeting-title:hover { outline: 1px solid #333; text-decoration: none; }
+        .meeting-title:focus { outline: 1px solid #555; text-decoration: none; }
+
+        /* ── Action buttons ── */
+        .download-button, .delete-button {
+            background: transparent;
+            color: #555;
+            border: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .download-button:hover { color: #e0e0e0; }
+        .delete-button:hover { color: #ff5555; }
+
+        /* invert SVG icons to white */
+        .download-button img, .delete-button img {
+            filter: invert(1) opacity(0.45);
+            transition: filter 0.2s;
+        }
+
+        .download-button:hover img { filter: invert(1) opacity(1); }
+        .delete-button:hover img { filter: invert(1) opacity(0.8) sepia(1) saturate(5) hue-rotate(310deg); }
+
+        /* ── Show all ── */
+        #show-all {
+            display: block;
+            margin: 1rem auto 0;
+            border-radius: 100px;
+            background: transparent;
+            color: #666;
+            border: 1px solid #2a2a2a;
+            padding: 0.3rem 1rem;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        #show-all:hover { border-color: #555; color: #e0e0e0; }
+
+        .fade-mask {
+            mask-image: linear-gradient(to bottom, #0a0a0a 0%, #0a0a0a 80%, transparent 100%);
+            max-height: 20rem;
+            overflow-y: hidden;
+        }
+
+        /* ── Scrollbar ── */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #444; }
+
+        /* ── Buttons (shared) ── */
+        button {
+            background: #ffffff;
+            color: #0a0a0a;
+            border: none;
+            padding: 0.5rem 1.1rem;
+            border-radius: 6px;
+            font-family: "Inter", sans-serif;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        button:hover { background: #e0e0e0; }
+        button:disabled { opacity: 0.35; cursor: not-allowed; }
+
+        section { margin-bottom: 4rem; }
+
+        /* ── Footer ── */
+        .page-footer {
+            text-align: center;
+            color: #333;
+            font-size: 0.75rem;
+            padding: 2rem 0 1rem;
+            border-top: 1px solid #1a1a1a;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="margin: 0px auto; max-width: 1440px;">
+
+        <dialog id="permission-dialog" closedby="any">
+            <p style="margin-bottom: 1rem;">Transcriber needs additional permissions to function smoothly.
+                <br />Please review and approve?
+                <br /><br />
+                <span style="color:#666;font-size:small;">PS: Sorry for hijacking whatever you were doing :(</span>
+            </p>
+            <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                <button id="later-button">Later</button>
+                <button id="review-button">Review</button>
+            </div>
+        </dialog>
+
+        <h1>Transcriber</h1>
+        <p class="tagline">Created by Byte by Byte</p>
+
+        <section id="last-10-meetings">
+            <div class="section-header">
+                <h2>Last 10 meetings</h2>
+                <button id="recover-last-meeting">↩ Recover last meeting</button>
+            </div>
+            <div id="meetings-table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Meeting title</th>
+                            <th>Platform</th>
+                            <th>Start &amp; duration</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="meetings-table">
+                        <!-- populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+            <button id="show-all" style="display: none;">Show all</button>
+        </section>
+
+        <div class="page-footer">Transcriber &mdash; Created by Byte by Byte</div>
+    </div>
+
+    <script src="meetings.js"></script>
+</body>
+
+</html>

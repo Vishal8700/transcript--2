@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "checkJs": true,
+        "noImplicitAny": false,
+        "types": ["chrome"],
+        "typeRoots": ["./node_modules/@types", "./types"]
+    },
+    "include": [
+        "extension/**/*",
+        "types/**/*"
+    ]
+}

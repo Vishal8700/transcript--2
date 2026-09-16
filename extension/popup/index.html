@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Transcriber</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      width: 340px;
+      padding: 1.25rem 1.25rem 1rem;
+      background: #0a0a0a;
+      color: #c0c0c0;
+      font-family: "Inter", sans-serif;
+      font-size: 0.875rem;
+    }
+
+    /* ── Header ── */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+    }
+
+    h1 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.3px;
+    }
+
+    .tagline {
+      font-size: 0.72rem;
+      color: #444;
+      margin-top: 1px;
+    }
+
+    .logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      opacity: 1;
+      object-fit: cover;
+      background: #1e1e1e;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: #111111;
+      border: 1px solid #1e1e1e;
+      border-radius: 10px;
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    /* ── Divider ── */
+    .divider {
+      border: none;
+      border-top: 1px solid #1e1e1e;
+      margin: 0.85rem 0;
+    }
+
+    /* ── Platform toggles ── */
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #444;
+      margin-bottom: 0.6rem;
+    }
+
+    .checkbox-group {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    input[type="checkbox"],
+    input[type="radio"] {
+      accent-color: #ffffff;
+      width: 15px;
+      height: 15px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    label {
+      cursor: pointer;
+      color: #c0c0c0;
+      font-size: 0.875rem;
+    }
+
+    label b { color: #e0e0e0; }
+
+    .sub-text {
+      color: #555;
+      font-size: 0.78rem;
+      margin-top: 1px;
+    }
+
+    /* ── Mode radio items ── */
+    .radio-item {
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+      margin-bottom: 0.65rem;
+    }
+
+    .radio-item:last-of-type { margin-bottom: 0; }
+
+    input[type="radio"] { margin-top: 2px; }
+
+    /* ── Footer links ── */
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.5rem;
+    }
+
+    a {
+      color: #888;
+      font-size: 0.8rem;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.15s;
+    }
+
+    a:hover { color: #e0e0e0; }
+
+    .version {
+      font-size: 0.72rem;
+      color: #333;
+    }
+
+    /* ── Branding footer ── */
+    .brand-footer {
+      text-align: center;
+      font-size: 0.68rem;
+      color: #555555;
+      margin-top: 0.75rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <div>
+      <h1>Transcriber</h1>
+      <div class="tagline">by Byte by Byte</div>
+    </div>
+    <img class="logo" src="../icon.png" alt="Transcriber icon" />
+  </div>
+
+  <div class="card">
+    <div class="section-label">Platform</div>
+    <div class="checkbox-group">
+      <input type="checkbox" id="enable-google-meet" />
+      <label for="enable-google-meet"><b>Google Meet</b></label>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="section-label">Mode</div>
+    <div class="radio-item">
+      <input type="radio" name="mode" id="auto-mode" />
+      <label for="auto-mode">
+        <b>Auto</b>
+        <div class="sub-text">Transcribe all meetings automatically</div>
+      </label>
+    </div>
+    <div class="radio-item">
+      <input type="radio" name="mode" id="manual-mode" />
+      <label for="manual-mode">
+        <b>Manual</b>
+        <div class="sub-text">Turn on transcript when needed</div>
+      </label>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="checkbox-group">
+      <input type="checkbox" id="hide-captions" />
+      <label for="hide-captions"><b>Hide captions in meeting UI</b></label>
+    </div>
+  </div>
+
+  <div class="footer-row">
+    <a href="../meetings.html" target="_blank">Meetings &rarr;</a>
+    <span class="version" id="version"></span>
+  </div>
+
+  <div class="brand-footer">Transcriber &mdash; Created by Byte by Byte</div>
+
+  <script src="popup.js"></script>
+</body>
+
+</html>
