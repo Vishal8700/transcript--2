@@ -481,4 +481,4 @@ Umesh Chandra - 56026826
 
 ## License
 
-Open source, created by **Byte by Byte**.
+Open source, created by **Bit by Bit**.
