@@ -469,16 +469,16 @@ The system uses error codes for debugging:
 All errors are logged anonymously to a Google Sheet for monitoring.
 
 ---
+## Video Preview
 
-## video :-
-https://www.youtube.com/watch?v=ZgInScJIVqw
+[![Video Preview](https://img.youtube.com/vi/ZgInScJIVqw/maxresdefault.jpg)](https://www.youtube.com/watch?v=ZgInScJIVqw)
 
+### Team Members
 
-Vishal kumar - 56026655
-Suman Hazra - 56026827
-Sanjana - 56026653
-Umesh Chandra - 56026826
-
+- Vishal Kumar - 56026655
+- Suman Hazra - 56026827
+- Sanjana - 56026653
+- Umesh Chandra - 56026826
 ## License
 
 Open source, created by **Bit by Bit**.
