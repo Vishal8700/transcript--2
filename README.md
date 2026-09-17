@@ -478,6 +478,8 @@ All errors are logged anonymously to a Google Sheet for monitoring.
 - Suman Hazra - 56026827
 - Sanjana - 56026653
 - Umesh Chandra - 56026826
+
+### PPT LINK - https://canva.link/ngdet5u161tog7q
 ## License
 
 Open source, created by **Bit by Bit**.
