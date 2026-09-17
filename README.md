@@ -469,8 +469,7 @@ The system uses error codes for debugging:
 All errors are logged anonymously to a Google Sheet for monitoring.
 
 ---
-## Video Preview
-
+## Demo Video ( click to preview )
 [![Video Preview](https://img.youtube.com/vi/ZgInScJIVqw/maxresdefault.jpg)](https://www.youtube.com/watch?v=ZgInScJIVqw)
 
 ### Team Members
