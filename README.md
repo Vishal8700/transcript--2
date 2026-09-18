@@ -480,6 +480,4 @@ All errors are logged anonymously to a Google Sheet for monitoring.
 - Umesh Chandra - 56026826
 
 ### PPT LINK - https://canva.link/ngdet5u161tog7q
-## License
-
-Open source, created by **Bit by Bit**.
+## created by **Bit by Bit**.
